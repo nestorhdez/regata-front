@@ -1,5 +1,16 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div>
+    <Contact/>
   </div>
 </template>
+
+<script>
+import Contact from '@/components/Contact.vue'
+
+export default {
+  name: 'contact',
+  components: {
+    Contact
+  }
+}
+</script>
