@@ -3,7 +3,7 @@
     <div id="nav">
       <router-link to="/"><img id="logo" src="./assets/fcv-logo.png" alt="Logotipo"></router-link>
       <div id="links-container">
-        <router-link to="/">Rankings</router-link>
+        <router-link to="/">Regatistas</router-link>
         <router-link to="/contact">Contact</router-link>
       </div>
     </div>
