@@ -4,7 +4,7 @@
       <router-link to="/"><img id="logo" src="./assets/fcv-logo.png" alt="Logotipo"></router-link>
       <div id="links-container">
         <router-link to="/">Regatistas</router-link>
-        <router-link to="/contact">Contact</router-link>
+        <router-link to="/contact">Contacto</router-link>
       </div>
     </div>
     <router-view/>

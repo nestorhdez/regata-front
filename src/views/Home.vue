@@ -1,23 +1,50 @@
 <template>
   <div class="home">
     <h1>Regatistas canarios federados</h1>
-    <div class="profile">
-      <img class="profile-image" src="../assets/profile.svg" alt="profile image">
-      <div class="profile-info">
-      <h2>Pedro Ramirez</h2>
-        <span>21 años</span>
-        <span>Ha participado en: 15 regatas</span>
-        <span>La media de sus posiciones es: 8º</span>
-      </div>
+    <h2 id="error" v-if="error.status">{{error.message}}</h2>
+    <div id="cards-container">
+      <Card :profile="profile" v-for="(profile, i) in profiles" :key="i"/>
     </div>
   </div>
 </template>
 
 <script>
+import Card from '../components/Profile-card';
 
 export default {
   name: 'home',
+  data() {
+    return {
+      profiles: [],
+      error: {
+        status: false,
+        message: ''
+      }
+    }
+  },
+  methods: {
+    getProfiles() {
+      this.error.status = false;
+
+      this.$axios.get('http://localhost:3000/response')
+        .then(res => {
+          this.profiles = res.data;
+          if(res.data.length == 0){
+            this.error.status = true;
+            this.error.message = 'No hemos encontrado regatistas'
+          }
+        })
+        .catch(() => {
+          this.error.status = true;
+          this.error.message = 'Sorry, something wrong happend'
+        });
+    }
+  },
+  created() {
+    this.getProfiles();
+  },
   components: {
+    Card
   }
 }
 </script>
@@ -27,33 +54,33 @@ export default {
     padding-top: 100px;
   }
 
-  .profile {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    padding: 20px;
-    background-color: #3b506b;
-    color: white;
-    width: 500px;
-    height: 200px;
-    margin: 30px;
-    border-radius: 4px;
-    box-shadow: 2px 1px 8px 1px rgba(0, 0, 0, 0.58);
+  #cards-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    grid-gap: 30px;
+    width: 90%;
+    margin: 40px auto;
+  }
+  #error {
+    font-size: 2rem;
+    margin-top: calc(50vh - 144px);
+    color: #f76742;
   }
 
-  .profile-image {
-    width: 50px;
-    height: 50px;
-    flex-basis: 20%;
+  @media(min-width: 900px) {
+    #cards-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
-
-  .profile-info {
-    flex-basis: 70%;
-    text-align: left;
+  @media(min-width: 1500px) {
+    #cards-container {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
-
-  span {
-    display: block;
+  @media(min-width: 2000px) {
+    #cards-container {
+      grid-template-columns: repeat(4, 1fr);
+    }
   }
 </style>
