@@ -1,15 +1,15 @@
 <template>
-    <div class="profile-card">
+    <router-link :to="`/profile/${profile._id}`" class="profile-card">
       <img class="profile-image" src="../assets/profile.svg" alt="profile image">
       <div class="profile-info">
-      <h2>{{`${profile.name} ${profile.first_surname} ${profile.second_surname}`}}</h2>
+        <h2>{{`${profile.name} ${profile.first_surname} ${profile.second_surname}`}}</h2>
         <span v-if="profile.noRegattas">Ha participado en: {{profile.noRegattas}} regatas</span>
         <span v-if="profile.club">Pertenece al club: {{profile.club}}</span>
         <span v-if="profile.category">Categoría: {{profile.category}}</span>
         <span v-if="profile.boat">Bote: {{profile.boat}}</span>
         <span>Especialidad: {{profile.specialty}}</span>
       </div>
-    </div>
+    </router-link>
 </template>
 
 <script>
@@ -36,6 +36,10 @@ export default {
 </script>
 
 <style scoped>
+
+    a {
+        text-decoration: none;
+    }
     .profile-card {
         display: flex;
         align-items: center;
