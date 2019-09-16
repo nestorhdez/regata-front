@@ -3,32 +3,50 @@
     <h1>Regatistas canarios federados</h1>
     <h2 id="error" v-if="error.status">{{error.message}}</h2>
     <div id="cards-container">
-      <Card :profile="profile" v-for="(profile, i) in profiles" :key="i"/>
+      <Card :profile="profile" v-for="(profile, i) in response.profiles" :key="i"/>
     </div>
+    <Pagination @page="setPage" :limitOfSet="5" :limitOfPage="10" :total="response.total"/>
   </div>
 </template>
 
 <script>
 import Card from '../components/Profile-card';
+import Pagination from '../components/Pagination';
 
 export default {
   name: 'home',
   data() {
     return {
-      profiles: [],
+      response: {
+        profiles: [],
+        total: 0,
+      },
       error: {
         status: false,
         message: ''
+      },
+      url: {
+        urlBase: 'http://localhost:3000/response',
+        page: ''
       }
+    }
+  },
+  watch: {
+    url: {
+      handler(){
+        this.getProfiles();
+      },
+      deep: true
     }
   },
   methods: {
     getProfiles() {
       this.error.status = false;
 
-      this.$axios.get('http://localhost:3000/response')
+      this.$axios.get(`${this.url.urlBase}${this.url.page ? `/${this.url.page}` : ''}`)
         .then(res => {
-          this.profiles = res.data;
+          this.response.total = res.data.total;
+          this.response.profiles = res.data.array;
           if(res.data.length == 0){
             this.error.status = true;
             this.error.message = 'No hemos encontrado regatistas'
@@ -38,13 +56,17 @@ export default {
           this.error.status = true;
           this.error.message = 'Sorry, something wrong happend'
         });
-    }
+    },
+     setPage(page) {
+      this.url.page = page;
+    },
   },
   created() {
     this.getProfiles();
   },
   components: {
-    Card
+    Card,
+    Pagination
   }
 }
 </script>
@@ -60,8 +82,9 @@ export default {
     justify-items: center;
     grid-gap: 30px;
     width: 90%;
-    margin: 40px auto;
+    margin: 40px auto 60px;
   }
+  
   #error {
     font-size: 2rem;
     margin-top: calc(50vh - 144px);
@@ -73,7 +96,7 @@ export default {
       grid-template-columns: repeat(2, 1fr);
     }
   }
-  @media(min-width: 1500px) {
+  @media(min-width: 1350px) {
     #cards-container {
       grid-template-columns: repeat(3, 1fr);
     }
