@@ -2,10 +2,12 @@
     <div class="profile-card">
       <img class="profile-image" src="../assets/profile.svg" alt="profile image">
       <div class="profile-info">
-      <h2>{{`${profile.name} ${profile.surName}`}}</h2>
-        <span>Fecha de nacimiento: {{profile.birthdate}}</span>
-        <span>Ha participado en: {{profile.noRegattas}} regatas</span>
-        <span>Pertenece al club: {{profile.club}}</span>
+      <h2>{{`${profile.name} ${profile.first_surname} ${profile.second_surname}`}}</h2>
+        <span v-if="profile.noRegattas">Ha participado en: {{profile.noRegattas}} regatas</span>
+        <span v-if="profile.club">Pertenece al club: {{profile.club}}</span>
+        <span v-if="profile.category">Categoría: {{profile.category}}</span>
+        <span v-if="profile.boat">Bote: {{profile.boat}}</span>
+        <span>Especialidad: {{profile.specialty}}</span>
       </div>
     </div>
 </template>
@@ -17,11 +19,17 @@ export default {
         profile: {
             _id: String,
             imagen: String,
-            name: String,
-            surName: String,
-            birthdate: String,
             noRegattas: Number,
-            club: String
+            name: String,
+            first_surname: String,
+            second_surname: String,
+            club: String,
+            affiliate_number: Number,
+            federation: String,
+            specialty: String,
+            boat: String,
+            category: String,
+            status: String
         }
     }
 }
@@ -37,7 +45,7 @@ export default {
         background-color: #3b506b;
         color: white;
         width: 100%;
-        height: 200px;
+        height: 280px;
         border-radius: 4px;
         box-shadow: 2px 1px 8px 1px rgba(0, 0, 0, 0.58);
     }
@@ -55,5 +63,12 @@ export default {
 
     span {
         display: block;
+        margin-top: 3px;
+    }
+
+    @media (min-width: 450px) {
+        .profile-card {
+            height: 230px;
+        }
     }
 </style>

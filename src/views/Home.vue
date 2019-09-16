@@ -82,9 +82,9 @@ export default {
     justify-items: center;
     grid-gap: 30px;
     width: 90%;
-    margin: 40px auto 60px;
+    margin: 40px auto 90px;
   }
-  
+
   #error {
     font-size: 2rem;
     margin-top: calc(50vh - 144px);
