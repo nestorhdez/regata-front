@@ -5,7 +5,7 @@
     <div id="cards-container">
       <Card :profile="profile" v-for="(profile, i) in result.profiles" :key="i"/>
     </div>
-    <Pagination @page="setPage" :limitOfSet="5" :limitOfPage="10" :total="result.total"/>
+    <Pagination @page="setPage" :limitOfSet="5" :limitOfPage="10" :total="result.total" v-if="!error.status"/>
   </div>
 </template>
 
