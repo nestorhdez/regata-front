@@ -27,11 +27,37 @@
       </div>
 
       <div class="click">
-        <button class="btn attach" :click="attach">Adjuntar</button>
-        <button class="btn send" :click="send">Enviar</button>
+        <button class="btn reset" @click="reset">Resetear</button>
+        <a :href="mailto">
+          <button class="btn send">Verificar y enviar</button>
+        </a>
       </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return{
+      firstName: '',
+      lastName: '',
+      email: '',
+      issue: '',
+      description: ''
+    }
+  },
+  methods: {
+    reset() {
+        this.firstName= this.lastName= this.email= this.issue=  this.description= ''
+    }
+  },
+  computed: {
+    mailto() {
+      return `mailto:ruben.altair91@gmail.com?subject=${this.issue}&body=Mensaje de ${this.firstName} ${this.lastName} <${this.email}>:%0A${this.description}`
+    }
+  }
+}
+</script>
 
 <style scoped>
 .formulary{
@@ -62,7 +88,7 @@ h2 {
   text-align: right;
 }
 .btn{
-  width: 120px;
+  width: 180px;
   padding: 5px;
   font-size: 16px;
   border-radius: 5px;
@@ -70,11 +96,11 @@ h2 {
   color: rgb(255, 255, 255);
   margin-left: 20px
 }
-.attach{
-  background-color: rgb(206, 27, 27)
+.reset{
+  width: 100px;
+  background-color: rgb(27, 206, 51)
 }
 .send{
   background-color: #3b506b
 }
-
 </style>
