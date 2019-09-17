@@ -26,6 +26,11 @@
         <textarea class="info" v-model="description" placeholder="Exponga su solicitud"></textarea>
       </div>
 
+      <div class="field advise">
+         <p>Si desea adjuntar uno o más archivos pulse en "Verificar y enviar", 
+          seleccione "Insertar" en la parte superior y elija "archivos"</p>
+      </div>
+      
       <div class="click">
         <button class="btn reset" @click="reset">Resetear</button>
         <a :href="mailto">
@@ -53,7 +58,7 @@ export default {
   },
   computed: {
     mailto() {
-      return `mailto:ruben.altair91@gmail.com?subject=${this.issue}&body=Mensaje de ${this.firstName} ${this.lastName} <${this.email}>:%0A${this.description}`
+      return `mailto:ruben.altair91@gmail.com?subject=(Incidencia): ${this.issue}&body=Mensaje de ${this.firstName} ${this.lastName} <${this.email}>:%0A${this.description}`
     }
   }
 }
@@ -74,6 +79,15 @@ h2 {
   margin: 5px 0 15px;
   font-size: 16px;
 }
+.advise{
+  font-size: 14px;
+  text-align: justify;
+  color: rgba(94, 94, 90, 0.616);
+  padding: 0px 30px 0px;
+}
+p{
+  margin: 0px;
+}
 .info{
    width: 100%;
     padding: 5px;
@@ -84,7 +98,7 @@ h2 {
     color: rgb(0, 0, 0);
 }
 .click{
-  padding: 20px 30px 20px;
+  padding: 15px 30px 10px;
   text-align: right;
 }
 .btn{
