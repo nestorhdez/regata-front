@@ -56,7 +56,7 @@ export default {
   },
   computed: {
     mailto() {
-      return `mailto:ruben.altair91@gmail.com?subject=(Incidencia): ${this.issue}&body=Mensaje de ${this.firstName} ${this.lastName} <${this.email}>:%0A${this.description}`
+      return `mailto:ruben.altair91@gmail.com?cc=${this.email}&subject=(Incidencia): ${this.issue}&body=Mensaje de ${this.firstName} ${this.lastName} <${this.email}>:%0A${this.description}`
     }
   }
 }
@@ -67,7 +67,8 @@ export default {
   max-width: 500px;
   margin: auto;
   border-radius: 5px;
-  background-color: white;
+  background-color: #3b506b;
+  color: white;
 }
 .field{
   padding: 10px 30px 10px;
@@ -86,15 +87,15 @@ label {
 }
 p{
   margin: 0px;
+  color: white;
 }
 .info{
     width: 100%;
     padding: 5px;
     font-size: 14px;
     border: 0px;
-    background-color: rgb(176, 230, 230);
+    /* background-color: rgb(176, 230, 230); */
     border-radius: 5px;
-    color: rgb(0, 0, 0);
 }
 .click{
   padding: 25px 30px 20px;
@@ -111,12 +112,11 @@ p{
 }
 .reset{
   width: 100px;
-  color: #3b506b;
   cursor: pointer;
 }
 .send{
-  background-color: #3b506b;
-  color: rgb(255, 255, 255);
-  font-weight: bolder
+  background-color: white;
+  color: #3b506b;
+  font-weight: bolder;
 }
 </style>
