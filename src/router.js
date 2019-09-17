@@ -11,6 +11,11 @@ export default new Router({
       name: 'home',
       component: Home
     },
+    // {
+    //   path: '/contact',
+    //   name: 'contact',
+    //   component: Contact,
+    // },
     {
       path: '/about',
       name: 'about',
