@@ -2,27 +2,27 @@
   <div class="formulary">
     
       <div class="field">
-        <h2>Nombre</h2>
+        <label>Nombre</label>
         <input class="info" type="text" v-model="firstName" placeholder="Introduzca nombre del regatista">
       </div>
 
       <div class="field">
-        <h2>Apellidos</h2>
+        <label>Apellidos</label>
         <input class="info" type="text" v-model="lastName" placeholder="Introduzca apellidos del regatista">
       </div>
 
       <div class="field">
-        <h2>Correo electronico</h2>
+        <label>Correo electronico</label>
         <input class="info" type="text" v-model="email" placeholder="Introduzca un e-mail">
       </div>
 
       <div class="field">
-        <h2>Asunto</h2>
+        <label>Asunto</label>
         <input class="info" type="text" v-model="issue" placeholder="Introduzca el motivo de su esolicitud">
       </div>
 
       <div class="field">
-        <h2>Descripcion</h2>
+        <label>Descripcion</label>
         <textarea class="info" v-model="description" placeholder="Exponga su solicitud"></textarea>
       </div>
 
@@ -32,10 +32,8 @@
       </div>
       
       <div class="click">
-        <button class="btn reset" @click="reset">Resetear</button>
-        <a :href="mailto">
-          <button class="btn send">Verificar y enviar</button>
-        </a>
+        <a class="btn reset" @click="reset">Resetear</a>
+        <a class="btn send" :href="mailto">Verificar y enviar</a>
       </div>
   </div>
 </template>
@@ -75,9 +73,10 @@ export default {
   padding: 10px 30px 10px;
   text-align: left;
 }
-h2 {
-  margin: 5px 0 15px;
+label {
+  padding: 5px 0 15px;
   font-size: 16px;
+  display: inline-block;
 }
 .advise{
   font-size: 14px;
@@ -89,7 +88,7 @@ p{
   margin: 0px;
 }
 .info{
-   width: 100%;
+    width: 100%;
     padding: 5px;
     font-size: 14px;
     border: 0px;
@@ -98,7 +97,7 @@ p{
     color: rgb(0, 0, 0);
 }
 .click{
-  padding: 15px 30px 10px;
+  padding: 25px 30px 20px;
   text-align: right;
 }
 .btn{
@@ -107,14 +106,17 @@ p{
   font-size: 16px;
   border-radius: 5px;
   align-self: center;
-  color: rgb(255, 255, 255);
-  margin-left: 20px
+  margin-left: 20px;
+  text-decoration: none;
 }
 .reset{
   width: 100px;
-  background-color: rgb(27, 206, 51)
+  color: #3b506b;
+  cursor: pointer;
 }
 .send{
-  background-color: #3b506b
+  background-color: #3b506b;
+  color: rgb(255, 255, 255);
+  font-weight: bolder
 }
 </style>
