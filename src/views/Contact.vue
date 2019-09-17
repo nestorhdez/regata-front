@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="contact">
     <Contact/>
   </div>
 </template>
@@ -14,3 +14,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .contact {
+    padding-top: 120px; 
+  }
+</style>
