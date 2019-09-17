@@ -1,4 +1,5 @@
 <template>
+
   <div class="home">
     <h1 v-if="!error.status">Regatistas canarios federados</h1>
     <h2 id="error" v-if="error.status">{{error.message}}</h2>
@@ -7,9 +8,11 @@
     </div>
     <Pagination @page="setPage" :limitOfSet="5" :limitOfPage="10" :total="result.total" v-if="!error.status"/>
   </div>
+  
 </template>
 
 <script>
+
 import Card from '../components/Profile-card';
 import Pagination from '../components/Pagination';
 
@@ -45,13 +48,13 @@ export default {
           this.result.profiles = response.data.res;
           if(response.data.res.length == 0){
             this.error.status = true;
-            this.error.message = 'No hemos encontrado regatistas'
+            this.error.message = 'No hemos encontrado regatistas';
           }
         })
         .catch(() => {
           this.result.profiles = [];
           this.error.status = true;
-          this.error.message = 'Lo sentimos, ha ocurrido un error'
+          this.error.message = 'Lo sentimos, ha ocurrido un error';
         });
     },
     setPage(page) {
@@ -67,9 +70,11 @@ export default {
     Pagination
   }
 }
+
 </script>
 
 <style scoped>
+
   .home {
     padding-top: 100px;
   }
@@ -94,14 +99,17 @@ export default {
       grid-template-columns: repeat(2, 1fr);
     }
   }
+
   @media(min-width: 1350px) {
     #cards-container {
       grid-template-columns: repeat(3, 1fr);
     }
   }
+
   @media(min-width: 2000px) {
     #cards-container {
       grid-template-columns: repeat(4, 1fr);
     }
   }
+
 </style>

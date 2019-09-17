@@ -1,4 +1,5 @@
 <template>
+
   <div id="app">
     <div id="nav">
       <router-link to="/"><img id="logo" src="./assets/fcv-logo.png" alt="Logotipo"></router-link>
@@ -9,6 +10,7 @@
     </div>
     <router-view/>
   </div>
+
 </template>
 
 <style>
@@ -26,6 +28,7 @@
   text-align: center;
   color: #2c3e50;
 }
+
 #nav {
   position: fixed;
   width: 100%;
@@ -54,4 +57,5 @@
 #nav a.router-link-exact-active {
   color: rgba(255, 255, 255, 1);
 }
+
 </style>

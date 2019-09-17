@@ -1,4 +1,5 @@
 <template>
+
     <router-link :to="`/profile/${profile._id}`" class="profile-card">
       <img class="profile-image" src="../assets/profile.svg" alt="profile image">
       <div class="profile-info">
@@ -7,12 +8,14 @@
         <span v-if="profile.club">Pertenece al club: {{profile.club}}</span>
         <span v-if="profile.category">Categoría: {{profile.category}}</span>
         <span v-if="profile.boat">Bote: {{profile.boat}}</span>
-        <span>Especialidad: {{profile.specialty}}</span>
+        <span v-if="profile.specialty">Especialidad: {{profile.specialty}}</span>
       </div>
     </router-link>
+
 </template>
 
 <script>
+
 export default {
     name: "profile-card",
     props: {
@@ -33,6 +36,7 @@ export default {
         }
     }
 }
+
 </script>
 
 <style scoped>
@@ -40,6 +44,7 @@ export default {
     a {
         text-decoration: none;
     }
+
     .profile-card {
         display: flex;
         align-items: center;
@@ -75,4 +80,5 @@ export default {
             height: 230px;
         }
     }
+    
 </style>
