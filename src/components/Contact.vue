@@ -56,7 +56,7 @@ export default {
   },
   computed: {
     mailto() {
-      return `mailto:ruben.altair91@gmail.com?cc=${this.email}&subject=(Incidencia): ${this.issue}&body=Mensaje de ${this.firstName} ${this.lastName} <${this.email}>:%0A${this.description}`
+      return `mailto:ruben.altair91@gmail.com?subject=(Incidencia): ${this.issue}&body=Mensaje de ${this.firstName} ${this.lastName} <${this.email}>:%0A${this.description}`
     }
   }
 }
