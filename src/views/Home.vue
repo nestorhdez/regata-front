@@ -29,7 +29,7 @@ export default {
         message: ''
       },
       url: {
-        urlBase: 'http://ded10c82.ngrok.io/',
+        urlBase: 'http://localhost:3000/response',
         page: ''
       }
     }

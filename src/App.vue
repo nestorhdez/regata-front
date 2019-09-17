@@ -34,6 +34,7 @@
   width: 100%;
   padding: 8px 30px;
   background-color: #3b506b;
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.58);
   display: flex;
   justify-content: space-between;
   align-items: center;
