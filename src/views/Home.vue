@@ -1,6 +1,6 @@
 <template>
-
   <div class="home">
+    <Search @fetch="searchMylove"/>
     <h1 v-if="!error.status">Regatistas canarios federados</h1>
     <h2 id="error" v-if="error.status">{{error.message}}</h2>
     <div id="cards-container">
@@ -15,6 +15,7 @@
 
 import Card from '../components/Profile-card';
 import Pagination from '../components/Pagination';
+import Search from '../components/Search'
 
 export default {
   name: 'home',
@@ -67,7 +68,8 @@ export default {
   },
   components: {
     Card,
-    Pagination
+    Pagination,
+    Search
   }
 }
 
@@ -76,7 +78,7 @@ export default {
 <style scoped>
 
   .home {
-    padding-top: 100px;
+    padding-top: 70px;
   }
 
   #cards-container {
