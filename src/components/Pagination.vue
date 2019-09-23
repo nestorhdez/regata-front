@@ -32,7 +32,7 @@ export default {
     },
     watch: {
         total() {
-            this.pages.totalPages = Math.ceil(this.total / this.limitOfPage);
+            this.pages.totalPages = Math.floor(this.total / this.limitOfPage);
             this.pages.set = [];
             this.initSet();
         }
@@ -122,6 +122,12 @@ export default {
         background: none;
         cursor: pointer;
         padding: 10px;
+    }
+
+    @media (max-width: 375px) {
+        button {
+            padding: 5px;
+        }
     }
 
 </style>
