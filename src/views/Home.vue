@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Search @fetch="searchMylove"/>
+    <Search @fetch="searchSailer"/>
     <h1 v-if="!error.status">Regatistas canarios federados</h1>
     <h2 id="error" v-if="error.status">{{error.message}}</h2>
     <div id="cards-container">
@@ -30,14 +30,19 @@ export default {
         message: ''
       },
       url: {
-        urlBase: 'http://localhost:3000/response',
-        page: ''
+        urlBase: 'http://f2d9684f.ngrok.io/regatista',
+        page: '',
+        search: ''
       }
     }
   },
   computed: {
     urlToUse() {
-      return `${this.url.urlBase}${this.url.page ? `?offset=${this.url.page}` : ''}`;
+      if(this.url.search){
+        return `${this.url.urlBase}?name=${this.url.search}${this.url.page ? `&offset=${this.url.page}` : ''}`
+      }else{
+        return `${this.url.urlBase}s${this.url.page ? `?offset=${this.url.page}` : ''}`
+      }
     }
   },
   methods: {
@@ -62,6 +67,11 @@ export default {
       this.url.page = page;
       this.getProfiles();
     },
+    searchSailer(fetch) {
+      this.url.search = fetch;
+      this.getProfiles();
+    },
+
   },
   created() {
     this.getProfiles();

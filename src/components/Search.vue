@@ -1,8 +1,8 @@
 <template>
     <div class="searchContainer">
 
-        <input type="text" class="search search__input" @keyup.enter ="getOne()" v-model= "sailer" 
-        placeholder="Nombre del regatista">
+        <input type="text" class="search search__input" @keyup.enter ="getOne()" 
+        v-model= "sailer" placeholder="Nombre del regatista">
 
         <button class="search search__btn" @click="getOne()">Buscar</button>
 
@@ -13,7 +13,9 @@
     export default {
 
         data() {
-            sailer = ''
+            return{
+                sailer: ''
+            }
         },
 
         methods: {
@@ -25,7 +27,7 @@
     }
 </script>
 
-<style>
+<style scoped>
 
     .searchContainer {
         padding: 10px;
@@ -44,7 +46,7 @@
         font-size: 14px;
         background-color: rgb(207, 200, 200);
         border-radius: 5px;
-        color: #3b506b28;
+        color: black;
         border: 0px;
     }
 
