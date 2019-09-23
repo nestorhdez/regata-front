@@ -17,6 +17,6 @@ export default {
 
 <style scoped>
   .contact {
-    padding-top: 120px; 
+    padding: 120px 20px 60px; 
   }
 </style>
