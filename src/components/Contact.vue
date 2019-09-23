@@ -2,28 +2,33 @@
   <div class="formulary">
     
       <div class="field">
-        <label>Nombre</label>
-        <input class="info" type="text" v-model="firstName" placeholder="Introduzca nombre del regatista">
+        <label for="firstName">Nombre</label>
+        <input class="info" type="text" v-model="firstName" id="firstName" 
+        placeholder="Introduzca nombre del regatista">
       </div>
 
       <div class="field">
-        <label>Apellidos</label>
-        <input class="info" type="text" v-model="lastName" placeholder="Introduzca apellidos del regatista">
+        <label for="lastName">Apellidos</label>
+        <input class="info" type="text" v-model="lastName" id="lastName"
+        placeholder="Introduzca apellidos del regatista">
       </div>
 
       <div class="field">
-        <label>Correo electronico</label>
-        <input class="info" type="text" v-model="email" placeholder="Introduzca un e-mail">
+        <label for="email">Correo electronico</label>
+        <input class="info" type="text" v-model="email" id="email"
+        placeholder="Introduzca un e-mail">
       </div>
 
       <div class="field">
-        <label>Asunto</label>
-        <input class="info" type="text" v-model="issue" placeholder="Introduzca el motivo de su esolicitud">
+        <label for="issue">Asunto</label>
+        <input class="info" type="text" v-model="issue" id="issue"
+        placeholder="Introduzca el motivo de su esolicitud">
       </div>
 
       <div class="field">
-        <label>Descripcion</label>
-        <textarea class="info" v-model="description" placeholder="Exponga su solicitud"></textarea>
+        <label for="description">Descripcion</label>
+        <textarea class="info" v-model="description" id="description" 
+        placeholder="Exponga su solicitud"></textarea>
       </div>
 
       <div class="field advise">
@@ -51,7 +56,7 @@ export default {
   },
   methods: {
     reset() {
-        this.firstName= this.lastName= this.email= this.issue=  this.description= ''
+        this.firstName= this.lastName=  this.email=  this.issue=  this.description= ''
     }
   },
   computed: {

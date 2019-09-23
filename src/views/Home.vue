@@ -1,6 +1,6 @@
 <template>
-
   <div class="home">
+    <Search @fetch="searchSailer"/>
     <h1 v-if="!error.status">Regatistas canarios federados</h1>
     <h2 id="error" v-if="error.status">{{error.message}}</h2>
     <div id="cards-container">
@@ -15,6 +15,7 @@
 
 import Card from '../components/Profile-card';
 import Pagination from '../components/Pagination';
+import Search from '../components/Search'
 
 export default {
   name: 'home',
@@ -29,14 +30,19 @@ export default {
         message: ''
       },
       url: {
-        urlBase: 'http://localhost:3000/response',
-        page: ''
+        urlBase: 'http://f2d9684f.ngrok.io/regatista',
+        page: '',
+        search: ''
       }
     }
   },
   computed: {
     urlToUse() {
-      return `${this.url.urlBase}${this.url.page ? `?offset=${this.url.page}` : ''}`;
+      if(this.url.search){
+        return `${this.url.urlBase}?name=${this.url.search}${this.url.page ? `&offset=${this.url.page}` : ''}`
+      }else{
+        return `${this.url.urlBase}s${this.url.page ? `?offset=${this.url.page}` : ''}`
+      }
     }
   },
   methods: {
@@ -61,13 +67,19 @@ export default {
       this.url.page = page;
       this.getProfiles();
     },
+    searchSailer(fetch) {
+      this.url.search = fetch;
+      this.getProfiles();
+    },
+
   },
   created() {
     this.getProfiles();
   },
   components: {
     Card,
-    Pagination
+    Pagination,
+    Search
   }
 }
 
@@ -76,7 +88,7 @@ export default {
 <style scoped>
 
   .home {
-    padding-top: 100px;
+    padding-top: 70px;
   }
 
   #cards-container {
