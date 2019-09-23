@@ -2,31 +2,31 @@
   <div class="formulary">
     
       <div class="field">
-        <label id="firstName">Nombre</label>
+        <label for="firstName">Nombre</label>
         <input class="info" type="text" v-model="firstName" id="firstName" 
         placeholder="Introduzca nombre del regatista">
       </div>
 
       <div class="field">
-        <label id="lastName">Apellidos</label>
+        <label for="lastName">Apellidos</label>
         <input class="info" type="text" v-model="lastName" id="lastName"
         placeholder="Introduzca apellidos del regatista">
       </div>
 
       <div class="field">
-        <label id="email">Correo electronico</label>
+        <label for="email">Correo electronico</label>
         <input class="info" type="text" v-model="email" id="email"
         placeholder="Introduzca un e-mail">
       </div>
 
       <div class="field">
-        <label id="issue">Asunto</label>
+        <label for="issue">Asunto</label>
         <input class="info" type="text" v-model="issue" id="issue"
         placeholder="Introduzca el motivo de su esolicitud">
       </div>
 
       <div class="field">
-        <label id="description">Descripcion</label>
+        <label for="description">Descripcion</label>
         <textarea class="info" v-model="description" id="description" 
         placeholder="Exponga su solicitud"></textarea>
       </div>
@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     reset() {
-        this.firstName= this.lastName= this.email= this.issue=  this.description= ''
+        this.firstName= this.lastName=  this.email=  this.issue=  this.description= ''
     }
   },
   computed: {
