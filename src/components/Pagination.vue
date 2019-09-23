@@ -124,4 +124,10 @@ export default {
         padding: 10px;
     }
 
+    @media (max-width: 375px) {
+        button {
+            padding: 5px;
+        }
+    }
+
 </style>
