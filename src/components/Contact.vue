@@ -22,7 +22,7 @@
       <div class="field">
         <label for="issue">Asunto</label>
         <input class="info" type="text" v-model="issue" id="issue"
-        placeholder="Introduzca el motivo de su esolicitud">
+        placeholder="Introduzca el motivo de su solicitud">
       </div>
 
       <div class="field">
@@ -51,7 +51,8 @@ export default {
       lastName: '',
       email: '',
       issue: '',
-      description: ''
+      description: '',
+      emailTo: 'ruben.altair91@gmail.com'
     }
   },
   methods: {
@@ -61,7 +62,7 @@ export default {
   },
   computed: {
     mailto() {
-      return `mailto:ruben.altair91@gmail.com?subject=(Incidencia): ${this.issue}&body=Mensaje de ${this.firstName} ${this.lastName} <${this.email}>:%0A${this.description}`
+      return `mailto:${this.emailTo}?subject=(RANKING): ${this.issue}&body=Mensaje de ${this.firstName} ${this.lastName} <${this.email}>:%0A${this.description}`
     }
   }
 }
