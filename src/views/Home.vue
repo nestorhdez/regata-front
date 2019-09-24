@@ -30,8 +30,8 @@ export default {
         message: ''
       },
       url: {
-        urlBase: 'http://f2d9684f.ngrok.io/regatista',
-        page: '',
+        urlBase: 'http://07988620.ngrok.io/regatista',
+        page: 0,
         search: ''
       }
     }
@@ -69,6 +69,7 @@ export default {
     },
     searchSailer(fetch) {
       this.url.search = fetch;
+      this.url.page = 0;
       this.getProfiles();
     },
 
@@ -112,13 +113,7 @@ export default {
     }
   }
 
-  @media(min-width: 1350px) {
-    #cards-container {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  @media(min-width: 2000px) {
+  @media(min-width: 1700px) {
     #cards-container {
       grid-template-columns: repeat(4, 1fr);
     }

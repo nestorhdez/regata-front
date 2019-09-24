@@ -32,7 +32,7 @@ export default {
         return {
             profile: {},
             id: '',
-            url: 'http://f2d9684f.ngrok.io/regatistas',
+            url: 'http://07988620.ngrok.io/regatistas',
             loading: true
         }
     },
@@ -49,7 +49,7 @@ export default {
                     this.profile = res.data[0];
                     this.loading = false;
                 })
-                .catch(error => {
+                .catch(() => {
                     this.$router.replace('/');
                 });
         }

@@ -20,7 +20,7 @@
 
         methods: {
             getOne() {
-                this.$emit('fetch',this.sailer)
+                this.$emit('fetch', this.sailer)
             }
         }
 

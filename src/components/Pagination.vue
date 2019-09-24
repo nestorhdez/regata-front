@@ -32,7 +32,7 @@ export default {
     },
     watch: {
         total() {
-            this.pages.totalPages = Math.floor(this.total / this.limitOfPage);
+            this.pages.totalPages = Math.ceil(this.total / this.limitOfPage);
             this.pages.set = [];
             this.initSet();
         }
@@ -40,7 +40,7 @@ export default {
     methods: {
         sendCurrentPage(e) {
             this.pages.current = +e.target.id;
-            this.$emit('page', e.target.innerText);
+            this.$emit('page', +e.target.innerText - 1);
         },
         sendFirstPage() {
             this.pages.current = 0;
