@@ -1,28 +1,28 @@
 <template>
   <div class="formulary">
-    
+
       <div class="field">
-        <label for="firstName">Nombre</label>
+        <label for="firstName">Nombre*</label>
         <input class="info" type="text" v-model="firstName" id="firstName" 
-        placeholder="Introduzca nombre del regatista">
+        placeholder="Introduzca nombre del regatista" required>
       </div>
 
       <div class="field">
-        <label for="lastName">Apellidos</label>
+        <label for="lastName">Apellidos*</label>
         <input class="info" type="text" v-model="lastName" id="lastName"
-        placeholder="Introduzca apellidos del regatista">
+        placeholder="Introduzca apellidos del regatista" required>
       </div>
 
       <div class="field">
-        <label for="email">Correo electronico</label>
-        <input class="info" type="text" v-model="email" id="email"
-        placeholder="Introduzca un e-mail">
+        <label for="email">Correo electronico*</label>
+        <input class="info" type="email" v-model="email" id="email"
+        placeholder="Introduzca un e-mail" required>
       </div>
 
       <div class="field">
-        <label for="issue">Asunto</label>
+        <label for="issue">Asunto*</label>
         <input class="info" type="text" v-model="issue" id="issue"
-        placeholder="Introduzca el motivo de su solicitud">
+        placeholder="Introduzca el motivo de su solicitud" required>
       </div>
 
       <div class="field">
@@ -32,14 +32,17 @@
       </div>
 
       <div class="field advise">
-         <p>Si desea adjuntar uno o más archivos pulse en "Verificar y enviar", 
-          seleccione "Insertar" en la parte superior y elija "archivos"</p>
+        <p>(*) Los campos señalados son obligatorios para el envio</p>
+        <p>Si desea adjuntar uno o más archivos pulse en "Verificar y enviar", 
+        seleccione "Insertar" en la parte superior y elija "archivos"</p>
       </div>
       
       <div class="click">
         <a class="btn reset" @click="reset">Resetear</a>
-        <a class="btn send" :href="mailto">Verificar y enviar</a>
+        <a v-if="required == true" class="btn send" :href="mailto">Verificar y enviar</a>
+        <span v-else class="btn send disabled">Verificar y enviar</span>
       </div>
+
   </div>
 </template>
 
@@ -63,6 +66,14 @@ export default {
   computed: {
     mailto() {
       return `mailto:${this.emailTo}?subject=(RANKING): ${this.issue}&body=Mensaje de ${this.firstName} ${this.lastName} <${this.email}>:%0A${this.description}`
+    },
+    required() {
+      if(this.firstName && this.lastName && this.email.includes("@" && ".") && this.issue){
+        return true
+      }else{
+        return false
+      }
+
     }
   }
 }
@@ -85,6 +96,14 @@ label {
   font-size: 16px;
   display: inline-block;
 }
+.info{
+    width: 100%;
+    padding: 5px;
+    border: 0px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+}
 .advise{
   font-size: 14px;
   text-align: justify;
@@ -92,19 +111,11 @@ label {
   padding: 0px 30px 0px;
 }
 p{
-  margin: 0px;
+  margin: 0px 0px 10px;
   color: white;
 }
-.info{
-    width: 100%;
-    padding: 5px;
-    font-size: 14px;
-    border: 0px;
-    /* background-color: rgb(176, 230, 230); */
-    border-radius: 5px;
-}
 .click{
-  padding: 25px 30px 20px;
+  padding: 20px 30px 20px;
   text-align: right;
 }
 .btn{
@@ -124,5 +135,8 @@ p{
   background-color: white;
   color: #3b506b;
   font-weight: bolder;
+}
+.disabled{
+  opacity: 0.5;
 }
 </style>
