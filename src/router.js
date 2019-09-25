@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Contact from './views/Contact.vue'
 import Profile from './views/Profile.vue'
+import Admin from './views/Admin.vue'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/profile/:id',
       name: 'profile',
       component: Profile
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: Admin
     }
   ]
 })
