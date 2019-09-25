@@ -34,6 +34,7 @@ export default {
         total() {
             this.pages.totalPages = Math.ceil(this.total / this.limitOfPage);
             this.pages.set = [];
+            this.pages.current = 0;
             this.initSet();
         }
     },

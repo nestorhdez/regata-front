@@ -2,7 +2,7 @@
 
   <div id="app">
     <div id="nav">
-      <router-link to="/"><img id="logo" src="./assets/fcv-logo.png" alt="Logotipo"></router-link>
+      <router-link to="/"><img @click="refreshHome" id="logo" src="./assets/fcv-logo.png" alt="Logotipo"></router-link>
       <div id="links-container">
         <router-link to="/">Regatistas</router-link>
         <router-link to="/contact">Contacto</router-link>
@@ -12,6 +12,20 @@
   </div>
 
 </template>
+
+<script>
+
+import eventBus from './main';
+
+export default {
+  methods: {
+    refreshHome(){
+      //Trigger the refresh event to the home page
+      eventBus.$emit('refresh');
+    }
+  }
+}
+</script>
 
 <style>
 

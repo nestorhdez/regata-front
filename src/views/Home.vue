@@ -20,7 +20,8 @@
 
 import Card from '../components/Profile-card';
 import Pagination from '../components/Pagination';
-import Search from '../components/Search'
+import Search from '../components/Search';
+import eventBus from '../main';
 
 export default {
   name: 'home',
@@ -85,6 +86,12 @@ export default {
   },
   created() {
     this.getProfiles();
+    //When the logo of the navbar is clicked trigger the refresh event
+    eventBus.$on('refresh', () => {
+      this.result.total = 0;
+      this.url.page = 0;
+      this.getProfiles();
+    });
   },
   components: {
     Card,
