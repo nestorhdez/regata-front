@@ -1,10 +1,15 @@
 <template>
   <div class="home">
-    <Search @fetch="searchSailer"/>
-    <h1 v-if="!error.status">Regatistas canarios federados</h1>
-    <h2 id="error" v-if="error.status">{{error.message}}</h2>
-    <div id="cards-container">
-      <Card :profile="profile" v-for="(profile, i) in result.profiles" :key="i"/>
+    <div id="loading" v-if="loading">
+      <span>Cargando...</span>
+    </div>
+    <div v-else>
+      <Search @fetch="searchSailer"/>
+      <h1 v-if="!error.status">Regatistas canarios federados</h1>
+      <h2 id="error" v-if="error.status">{{error.message}}</h2>
+      <div id="cards-container">
+        <Card :profile="profile" v-for="(profile, i) in result.profiles" :key="i"/>
+      </div>
     </div>
     <Pagination @page="setPage" :limitOfSet="5" :limitOfPage="10" :total="result.total" v-if="!error.status"/>
   </div>
@@ -21,6 +26,7 @@ export default {
   name: 'home',
   data() {
     return {
+      loading: false,
       result: {
         profiles: [],
         total: 0,
@@ -30,7 +36,7 @@ export default {
         message: ''
       },
       url: {
-        urlBase: 'http://07988620.ngrok.io/regatista',
+        urlBase: 'http://fddecf9c.ngrok.io/regatista',
         page: 0,
         search: ''
       }
@@ -47,9 +53,11 @@ export default {
   },
   methods: {
     getProfiles() {
+      this.loading = true;
       this.error.status = false;
       this.$axios.get(this.urlToUse)
         .then(response => {
+          this.loading = false;
           this.result.total = response.data.total;
           this.result.profiles = response.data.res;
           if(response.data.res.length == 0){
@@ -58,6 +66,7 @@ export default {
           }
         })
         .catch(() => {
+          this.loading = false;
           this.result.profiles = [];
           this.error.status = true;
           this.error.message = 'Lo sentimos, ha ocurrido un error';
@@ -105,6 +114,17 @@ export default {
     font-size: 2rem;
     margin-top: calc(50vh - 144px);
     color: #f76742;
+  }
+
+  #loading {
+      width: 100vw;
+    }
+
+  #loading span {
+    margin: calc(50vh - 52px) auto;
+    font-size: 1.5rem;
+    font-weight: 500;
+    display: block;
   }
 
   @media(min-width: 900px) {
