@@ -1,6 +1,9 @@
 <template>
     <div id="regattas-table">
-        <h2>Resultado de regatas</h2>
+        <div id="title-container">
+            <h2>Resultado de regatas</h2>
+            <router-link to="/contact">Realizar una petición</router-link>
+        </div>
         <div class="regatta-cells grid-cells">
             <span>Posición</span>
             <span>Regata</span>
@@ -30,8 +33,25 @@ export default {
         margin-top: 50px;
     }
 
-    #regattas-table h2 {
-        margin-bottom: 15px;
+    #title-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+
+    #title-container h2 {
+        margin-bottom: 10px;
+    }
+
+    a{
+        text-decoration: none;
+        color: #2b3e50;
+        text-decoration: underline;
+        padding: 5px 0;
+        border-radius: 4px;
+        font-weight: 500;
     }
 
     .grid-cells {
@@ -62,6 +82,13 @@ export default {
 
     .regattas-container span:nth-child(2) {
         font-size: .9rem;
+    }
+
+    @media (min-width: 458px) {
+        #title-container h2 {
+            margin-bottom: 0;
+            margin-right: 30px;
+        }
     }
 
 </style>
