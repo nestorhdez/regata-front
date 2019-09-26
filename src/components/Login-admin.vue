@@ -1,7 +1,7 @@
 <template>
     <div class="login">
         <form>
-            <h2>Acceso administrador</h2>
+            <h2>Acceso de administrador</h2>
             <div class="form-content">
                 <label for="Name">Nombre</label>
                 <input type="text" v-model="name" id="Name" 
@@ -21,8 +21,10 @@
 export default {
     data() {
         return{
-            name: '',
-            password: ''
+            user: {
+                name: '',
+                password: ''
+            }
         }
     }
 }

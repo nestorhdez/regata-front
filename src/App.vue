@@ -6,6 +6,7 @@
       <div id="links-container">
         <router-link to="/">Regatistas</router-link>
         <router-link to="/contact">Contacto</router-link>
+        <router-link to="/admin"><img id="admin" src="./assets/icons8-servicios-50.png" alt="administrador"></router-link>
       </div>
     </div>
     <router-view/>
@@ -44,6 +45,11 @@
 #logo {
   width: 45px;
   height: 45px;
+}
+
+#links-container {
+  display: flex;
+  align-items: center
 }
 
 #nav a {

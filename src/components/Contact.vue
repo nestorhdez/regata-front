@@ -43,31 +43,24 @@ export default {
 
   data() {
     return{
-
       firstName: '',
       surName: '',
       email: '',
       issue: '',
       description: '',
       emailTo: 'ruben.altair91@gmail.com'
-
     }
   },
 
   methods: {
-
     reset() {
         this.firstName= this.surName=  this.email=  this.issue=  this.description= ''
     }
-
   },
-
   computed: {
-
     mailto() {
       return `mailto:${this.emailTo}?subject=(RANKING): ${this.issue}&body=Mensaje de ${this.firstName} ${this.surName} <${this.email}>:%0A${this.description}`
     },
-
     required() {
       if(this.firstName && this.surName && this.email.includes("@" && ".") && this.issue){
         return true
@@ -75,9 +68,7 @@ export default {
         return false
       }
     }
-
   }
-
 }
 </script>
 
