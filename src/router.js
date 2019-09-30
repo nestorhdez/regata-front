@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import Contact from './views/Contact.vue'
 import Profile from './views/Profile.vue'
 import Admin from './views/Admin.vue'
+import Login from './views/Login-admin.vue'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/admin',
       name: 'admin',
       component: Admin
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     }
   ]
 })

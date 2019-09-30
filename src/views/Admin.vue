@@ -1,18 +1,16 @@
 <template>
   <div class="admin">
-    <AdminPage v-if="access"/>
-    <Login v-else @approve='accessApprove'/>
+    <h1>Welcome!</h1>
   </div>
 </template>
 
 <script>
-import Login from '@/components/Login-admin.vue'
-import AdminPage from '@/components/Page-admin.vue'
 
 export default {
   name: 'admin',
   data(){
-    return{
+    return {
+      jwt: localStorage.getItem('auth-regata'),
       access: false
     }
   },
@@ -22,8 +20,11 @@ export default {
     }
   },
   components: {
-    Login,
-    AdminPage
+  },
+  created(){
+    if(!this.jwt){
+      this.$router.replace('/login');
+    }
   }
 }
 </script>

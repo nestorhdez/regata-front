@@ -32,7 +32,7 @@ export default {
         return {
             profile: {},
             id: '',
-            url: 'http://07988620.ngrok.io/regatistas',
+            url: 'http://c316658e.ngrok.io/regatistas',
             loading: true
         }
     },

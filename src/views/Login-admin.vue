@@ -1,6 +1,6 @@
 <template>
     <div class="login">
-        <form>
+        <div class="form">
             <h2>Acceso de administrador</h2>
             <span class="denied" v-if="denied">
                 El nombre y/o la contraseña no son validos</span>
@@ -14,8 +14,8 @@
                 <input type="password" v-model="passwordUser" id="Password"
                 placeholder="Introduzca su contraseña" required>
             </div>
-            <button type="submit" @click="access">Iniciar sesión</button>
-        </form>
+            <button @click="access">Iniciar sesión</button>
+        </div>
     </div>
 </template>
 
@@ -25,16 +25,24 @@ export default {
         return{
             nameUser: '',
             passwordUser: '',
-            validation: {
-                name: 'paco',
-                password: '1234'
-            },
             denied: false,
+            jwt: localStorage.getItem('auth-regata')
         }
     },
     methods: {
         access() {
-            this.nameUser == this.validation.name && this.passwordUser == this.validation.password ? this.$emit('approve') : this.denied=true
+            this.denied = false;
+            this.$axios.post('http://c316658e.ngrok.io/auth/login', {name: this.nameUser, password: this.passwordUser})
+                .then(res => {
+                    localStorage.setItem('auth-regata', JSON.stringify(res.data));
+                    this.$router.replace('/admin');
+                })
+                .catch( () => this.denied = true)
+        }
+    },
+    created(){
+        if(this.jwt) {
+            this.$router.replace('/admin');
         }
     }
 }
@@ -42,7 +50,11 @@ export default {
 
 <style scoped>
 
-    .login{
+    .login {
+        padding: 150px 10px 80px
+    }
+
+    .form{
         max-width: 500px;
         margin: auto;
         border-radius: 5px;
