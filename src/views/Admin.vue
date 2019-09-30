@@ -1,16 +1,29 @@
 <template>
   <div class="admin">
-    <Login/>
+    <AdminPage v-if="access"/>
+    <Login v-else @approve='accessApprove'/>
   </div>
 </template>
 
 <script>
 import Login from '@/components/Login-admin.vue'
+import AdminPage from '@/components/Page-admin.vue'
 
 export default {
-  name: 'login',
+  name: 'admin',
+  data(){
+    return{
+      access: false
+    }
+  },
+  methods: {
+    accessApprove() {
+      return this.access = true
+    }
+  },
   components: {
-    Login
+    Login,
+    AdminPage
   }
 }
 </script>

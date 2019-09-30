@@ -1,30 +1,24 @@
 <template>
     <div class="searchContainer">
-
         <input type="text" class="search search__input" @keyup.enter ="getOne()" 
         v-model= "sailer" placeholder="Nombre del regatista">
-
         <button class="search search__btn" @click="getOne()">Buscar</button>
-
     </div>
 </template>
 
 <script>
-    export default {
-
-        data() {
-            return{
-                sailer: ''
-            }
-        },
-
-        methods: {
-            getOne() {
-                this.$emit('fetch', this.sailer)
-            }
+export default {
+    data() {
+        return{
+            sailer: ''
         }
-
+    },
+    methods: {
+        getOne() {
+            this.$emit('fetch', this.sailer)
+        }
     }
+}
 </script>
 
 <style scoped>
