@@ -1,35 +1,80 @@
 <template>
   <div class="admin">
-    <AdminPage v-if="access"/>
-    <Login v-else @approve='accessApprove'/>
+    <div class="selector">
+      <button class="btn" @click="choice = 'edit'">Editar cuenta</button>
+      <button class="btn" @click="choice = 'newAdmin'">Agregar administrador</button>
+      <button class="btn" @click="choice = 'newSailer'">Agregar regatista</button>
+
+    </div>
+    <div class="collection">
+      <Edit class="component" v-if="choice == 'edit'"/>
+      <NewAdmin class="component" v-if="choice == 'newAdmin'"/>
+      <NewSailer class="component" v-if="choice == 'newSailer'"/>
+    </div>
   </div>
 </template>
 
 <script>
-import Login from '@/components/Login-admin.vue'
-import AdminPage from '@/components/Page-admin.vue'
+import Edit from '@/components/Admin-edit.vue'
+import NewAdmin from '@/components/Admin-newAdmin.vue'
+import NewSailer from '@/components/Admin-newSailer.vue'
 
 export default {
   name: 'admin',
   data(){
     return{
-      access: false
+      choice: 'edit',
+      jwt: localStorage.getItem('auth-regata') 
     }
   },
-  methods: {
-    accessApprove() {
-      return this.access = true
+  created() {
+    if(!this.jwt){
+      this.$router.replace('/login');
     }
   },
   components: {
-    Login,
-    AdminPage
+    Edit,
+    NewAdmin,
+    NewSailer
   }
 }
 </script>
 
 <style scoped>
-    .admin{
-        padding: 150px 10px 80px
-    }
+
+  .admin {
+    padding: 85px 10px 10px;
+  }
+
+  .selector{
+    max-width: 750px;
+    margin: auto;
+    padding: 10px 0px 0px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .collection{
+    max-width: 750px;
+    margin: auto;
+    border-radius: 5px;
+    background-color: #3b506b;
+  }
+
+  .btn{
+    width: 200px;
+    margin: 10px 5px 0px;
+    padding: 5px;
+    border-bottom: 0px;
+    font-size: 16px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    color: #3b506b;
+  }
+
+  .btn:active{
+    background-color: #3b506b;
+    color: beige;
+  }
+
 </style>
