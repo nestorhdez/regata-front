@@ -35,7 +35,7 @@ export default {
         return {
             profile: {},
             id: '',
-            url: 'http://c316658e.ngrok.io/regatistas',
+            url: 'http://403e66c2.ngrok.io/regatistas',
             loading: true,
             jwt: localStorage.getItem('auth-regata'),
             edit: false

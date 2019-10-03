@@ -37,7 +37,7 @@ export default {
         message: ''
       },
       url: {
-        urlBase: 'http://c316658e.ngrok.io/regatista',
+        urlBase: 'http://403e66c2.ngrok.io/regatista',
         page: 0,
         search: ''
       }

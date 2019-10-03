@@ -32,7 +32,7 @@ export default {
     methods: {
         access() {
             this.denied = false;
-            this.$axios.post('http://c316658e.ngrok.io/auth/login', {name: this.nameUser, password: this.passwordUser})
+            this.$axios.post('http://403e66c2.ngrok.io/auth/login', {name: this.nameUser, password: this.passwordUser})
                 .then(res => {
                     localStorage.setItem('auth-regata', JSON.stringify(res.data));
                     this.$router.replace('/admin');
@@ -73,7 +73,7 @@ export default {
     }
 
     .denied{
-        color: rgba(255, 0, 0, 0.787);
+        color: #f76742;
         font-weight: 700
     }
 
