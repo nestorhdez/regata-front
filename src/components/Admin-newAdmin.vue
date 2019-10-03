@@ -32,7 +32,6 @@
 </template>
 
 <script>
-import { create } from 'domain';
 export default {
     data() {
         return {
@@ -55,7 +54,7 @@ export default {
     methods: {
         addAdmin(){
             this.$axios.post(this.url, {name: this.name, email: this.email, password: this.password})
-            .then(response => {
+            .then(() => {
                 this.feedback.error= false
                 this.feedback.message= 'Nuevo administrador creado con éxito'
             })
