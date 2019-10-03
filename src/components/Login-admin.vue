@@ -61,7 +61,7 @@ export default {
     }
 
     .denied{
-        color: rgba(255, 0, 0, 0.787);
+        color: #f76742;
         font-weight: 700
     }
 
