@@ -6,11 +6,13 @@
       <button :class="[this.choice == 'newAdmin' ? 'btn btn-active' : 'btn']" 
       @click="choice = 'newAdmin'">Agregar administrador</button>
       <button :class="[this.choice == 'newSailer' ? 'btn btn-active' : 'btn']" @click="choice = 'newSailer'">Agregar regatista</button>
+      <button :class="[this.choice == 'logout' ? 'btn btn-active' : 'btn']" @click="choice = 'logout'">Cerrar sesión</button>
     </div>
     <div class="collection">
       <Edit class="component" v-if="choice == 'edit'"/>
       <NewAdmin class="component" v-if="choice == 'newAdmin'"/>
       <NewSailer class="component" v-if="choice == 'newSailer'"/>
+      <Logout class="component" v-if="choice == 'logout'"/>
     </div>
   </div>
 </template>
@@ -19,13 +21,14 @@
 import Edit from '@/components/Admin-edit.vue'
 import NewAdmin from '@/components/Admin-newAdmin.vue'
 import NewSailer from '@/components/Admin-newSailer.vue'
+import Logout from '@/components/Logout.vue'
 
 export default {
   name: 'admin',
   data(){
     return{
       choice: 'edit',
-      jwt: localStorage.getItem('auth-regata') 
+      jwt: localStorage.getItem('auth-regata')
     }
   },
   created() {
@@ -36,7 +39,8 @@ export default {
   components: {
     Edit,
     NewAdmin,
-    NewSailer
+    NewSailer,
+    Logout
   }
 }
 </script>

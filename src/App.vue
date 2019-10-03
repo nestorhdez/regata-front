@@ -6,7 +6,7 @@
       <div id="links-container">
         <router-link to="/">Regatistas</router-link>
         <router-link to="/contact">Contacto</router-link>
-        <router-link to="/admin"><img id="admin" src="./assets/icons8-servicios-50.png" alt="administrador"></router-link>
+        <router-link :to="jwt ? '/admin' : '/login'">{{jwt ? 'Admin' : 'Iniciar sesión'}}</router-link>
       </div>
     </div>
     <router-view/>
@@ -19,6 +19,16 @@
 import eventBus from './main';
 
 export default {
+  data(){
+    return {
+      jwt: localStorage.getItem('auth-regata')
+    }
+  },
+  watch: {
+    '$route'(){
+      this.jwt = localStorage.getItem('auth-regata');
+    }
+  },
   methods: {
     refreshHome(){
       //Trigger the refresh event to the home page
