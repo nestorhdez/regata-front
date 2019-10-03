@@ -173,10 +173,10 @@ export default {
             if(this.newSailer.second_surname && this.newSailer.federation && this.newSailer.club && 
             this.newSailer.name && this.newSailer.first_surname && this.newSailer.category && 
             this.newSailer.status && this.newSailer.boat){
-                console.log('in')
+                
                 this.$axios.post('http://403e66c2.ngrok.io/regatistas', this.newSailer)
                     .then(() => this.feedback.message= 'Regatista añadido con éxito')
-                    .cath(() => {
+                    .catch(() => {
                         this.feedback.error = true;
                         this.feedback.message = 'No se ha podido añadir con éxito. Lo sentimos';
                     });
