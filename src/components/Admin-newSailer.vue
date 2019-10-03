@@ -4,9 +4,9 @@
         <form>
             <div class="container side">
                 <div class="field">
-                    <label for="number">Numero*</label>
+                    <label for="number">Numero de federación</label>
                     <input type="text" v-model="newSailer.affiliate_number" id="number" 
-                    placeholder="Nº de afiliado" required>
+                    placeholder="Nº de afiliado">
                 </div>
                 <div class="field">
                     <label for="federation">Federación*</label>
@@ -29,9 +29,9 @@
                     placeholder="Primer apellido" required>
                 </div>
                 <div class="field">
-                    <label for="secondSurname">Segundo apellido</label>
+                    <label for="secondSurname">Segundo apellido*</label>
                     <input type="text" v-model="newSailer.second_surname" id="secondSurname" 
-                    placeholder="Segundo apellido">
+                    placeholder="Segundo apellido" required>
                 </div>   
                 <div class="field">
                     <label for="nif">NIF</label>
@@ -96,7 +96,7 @@
                     placeholder="Especialidad">
                 </div>
                 <div class="field">
-                    <label for="boat">Barco</label>
+                    <label for="boat">Barco*</label>
                     <input type="text" v-model="newSailer.boat" id="boat" 
                     placeholder="Tipo de embarcación">
                 </div>
@@ -118,7 +118,7 @@
                 <div class="field">
                     <label for="status">Estatus*</label>
                     <input type="text" v-model="newSailer.status" id="status" 
-                    placeholder="Activo o inactivo" required>
+                    placeholder="Activo o pendiente" required>
                 </div>
                 <div class="field bottom">
                     <p :class="this.feedback.error ? 'feedback error' : 'feedback'" 
@@ -168,10 +168,18 @@ export default {
     },
     methods: {
         addOne() {
-            if(this.newSailer.affiliate_number && this.newSailer.federation && this.newSailer.club && 
+            this.feedback.error = false;
+
+            if(this.newSailer.second_surname && this.newSailer.federation && this.newSailer.club && 
             this.newSailer.name && this.newSailer.first_surname && this.newSailer.category && 
-            this.newSailer.status){
-                this.feedback.message= 'Regatista añadido con éxito'
+            this.newSailer.status && this.newSailer.boat){
+                console.log('in')
+                this.$axios.post('http://403e66c2.ngrok.io/regatistas', this.newSailer)
+                    .then(() => this.feedback.message= 'Regatista añadido con éxito')
+                    .cath(() => {
+                        this.feedback.error = true;
+                        this.feedback.message = 'No se ha podido añadir con éxito. Lo sentimos';
+                    });
             }
         }
     }
