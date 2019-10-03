@@ -3,19 +3,24 @@
         <h2>Editar perfil</h2>
         <form class="field">
             <label for="name">Cambiar nombre: {{admin.name}}</label>
+            <span :class="this.feedback.error ? 'feedback error' : 'feedback'" 
+            v-if="feedback.field == 'name'">{{feedback.message}}</span>
             <input class="new" type="text" v-model="newName" id="name" 
             placeholder="Nuevo nombre" required>
             <button class="btn" @click="changeName">Modificar</button>
         </form>
         <form class="field">
             <label for="email">Cambiar email: {{admin.email}}</label>
+            <span :class="this.feedback.error ? 'feedback error' : 'feedback'" 
+            v-if="feedback.field == 'email'">{{feedback.message}}</span>
             <input class="new" type="email" v-model="newEmail" id="email" 
             placeholder="Nuevo email" required>
             <button class="btn" @click="changeEmail">Modificar</button>
         </form>
         <form class="field">
             <label for="password">Cambiar contraseña</label>
-            <span class="error" v-if="error.field == 'password'">{{error.message}}</span>
+            <span :class="this.feedback.error ? 'feedback error' : 'feedback'" 
+            v-if="feedback.field == 'password'">{{feedback.message}}</span>
             <input class="new" type="password" v-model="newPassword" id="password" 
             placeholder="Nueva contraseña" required>
             <input class="new" type="password" v-model="verifiedPassword"
@@ -38,7 +43,8 @@ export default {
             newPassword: '',
             newEmail: '',
             verifiedPassword: '',
-            error: {
+            feedback: {
+                error: false,
                 field: '',
                 message: ''
             }
@@ -46,26 +52,35 @@ export default {
     },
     methods: {
         changeName() {
+            this.resetFeedback()
+            this.feedback.field = 'name'
             if(this.newName){
                 this.admin.name = this.newName
-                console.log(this.admin.name)
+                this.feedback.message = 'Nombre cambiado con éxito'
             }
         },
         changeEmail() {
+            this.resetFeedback()
+            this.feedback.field = 'email'
             if(this.newEmail.includes("@" && ".")){
                 this.admin.email = this.newEmail
-                console.log(this.admin.email)
+                this.feedback.message = 'E.mail cambiado con éxito'
             }
         },
         changePassword() {
+            this.resetFeedback()
+            this.feedback.field = 'password'
             if(this.newPassword && this.newPassword === this.verifiedPassword){
-                this.error.field = ''
+                this.feedback.message = 'Contraseña cambiada con éxito'
                 this.admin.password = this.newPassword
-                console.log(this.admin.password)
             }else{
-                this.error.field = 'password'
-                this.error.message = 'La contraseña no coincide'
-            }
+                this.feedback.error = true,
+                this.feedback.message = 'La contraseña no coincide'
+            }        
+        },
+        resetFeedback() {
+            this.feedback.error = false
+            this.feedback.message = ''
         }
     },
 }
@@ -120,10 +135,15 @@ export default {
         color: #3b506b;
     }
 
+    .feedback{
+        color: #75f742;
+        font-weight: 500;
+        width: 100%;
+        text-align: justify
+    }
+
     .error{
         color: #f76742;
-        font-weight: 700;
-        width: 100%;
     }
 
     @media(min-width: 600px) {

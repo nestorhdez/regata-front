@@ -22,6 +22,8 @@
             y claves de acceso</p>
         </div>
         <div class="click">
+            <span :class="this.feedback.error ? 'feedback error' : 'feedback'" 
+            v-if="feedback.message">{{feedback.message}}</span>
             <a v-if="required" class="btn" :href="mailto" @click="addAdmin">
             Confirmar y enviar</a>
             <span v-else class="btn disabled">Confirmar y enviar</span>
@@ -42,12 +44,16 @@ export default {
                 advise: '%0A%0ALe recomendamos que modifique su contraseña en cuanto se conecte',
                 boddy1: 'Bienvenido, se le ha otorgado una cuenta como administrador de la web',
                 boddy2: '.Sus datos son los siguientes:%0A%0Anombre de usuario:'
+            },
+            feedback: {
+                error: false,
+                message: ''
             }
         }
     },
     methods: {
         addAdmin(){
-            console.log(this.name, this.email, this.password)
+            this.feedback.message= 'Nuevo administrador creado con éxito'
         }
     },
     computed: {
@@ -95,6 +101,8 @@ export default {
     }
 
     .click{
+        display: flex;
+        flex-direction: column;
         padding: 20px 30px 20px;
         text-align: right;
     }
@@ -102,6 +110,18 @@ export default {
     p{
         color: rgba(255, 255, 255, 0.692);
         text-align: justify
+    }
+
+    .feedback{
+        color: #75f742;
+        font-weight: 500;
+        width: 100%;
+        text-align: justify;
+        margin-bottom: 10px
+    }
+
+    .error{
+        color: #f76742;
     }
 
     .btn{
@@ -119,6 +139,12 @@ export default {
 
     .disabled{
         opacity: 0.5;
+    }
+
+    @media(min-width: 600px) {
+        .feedback{
+            text-align: right;
+        }
     }
    
 </style>

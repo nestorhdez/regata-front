@@ -1,10 +1,11 @@
 <template>
   <div class="admin">
     <div class="selector">
-      <button class="btn" @click="choice = 'edit'">Editar cuenta</button>
-      <button class="btn" @click="choice = 'newAdmin'">Agregar administrador</button>
-      <button class="btn" @click="choice = 'newSailer'">Agregar regatista</button>
-
+      <button :class="[this.choice == 'edit' ? 'btn btn-active' : 'btn']" 
+      @click="choice = 'edit'">Editar cuenta</button>
+      <button :class="[this.choice == 'newAdmin' ? 'btn btn-active' : 'btn']" 
+      @click="choice = 'newAdmin'">Agregar administrador</button>
+      <button :class="[this.choice == 'newSailer' ? 'btn btn-active' : 'btn']" @click="choice = 'newSailer'">Agregar regatista</button>
     </div>
     <div class="collection">
       <Edit class="component" v-if="choice == 'edit'"/>
@@ -47,17 +48,18 @@ export default {
   }
 
   .selector{
-    max-width: 750px;
+    max-width: 740px;
     margin: auto;
     padding: 10px 0px 0px;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
   }
 
   .collection{
     max-width: 750px;
     margin: auto;
     border-radius: 5px;
+    border: 0px;
     background-color: #3b506b;
   }
 
@@ -69,10 +71,15 @@ export default {
     font-size: 16px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    color: #3b506b;
+    color: #3b506b; 
+    outline: none;
   }
 
   .btn:active{
+    opacity: 0.5;
+  }
+
+  .btn-active{
     background-color: #3b506b;
     color: beige;
   }

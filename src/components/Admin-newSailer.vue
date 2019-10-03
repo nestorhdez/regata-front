@@ -106,7 +106,7 @@
                     placeholder="Categoria" required>
                 </div>
                 <div class="field">
-                    <label for="expirationDate">Fecha de expiración*</label>
+                    <label for="expirationDate">Fecha de expiración</label>
                     <input type="text" v-model="newSailer.expiration_date" id="expirationDate" 
                     placeholder="Expiración de la licencia">
                 </div>
@@ -121,7 +121,9 @@
                     placeholder="Activo o inactivo" required>
                 </div>
                 <div class="field bottom">
-                    <p>(*) Los campos señalados son obligatorios</p>
+                    <p :class="this.feedback.error ? 'feedback error' : 'feedback'" 
+                    v-if="feedback.message">{{feedback.message}}</p>
+                    <p v-else>(*) Los campos señalados son obligatorios</p>
                     <button class="btn" @click="addOne">Añadir</button>
                 </div>
             </div>
@@ -157,6 +159,10 @@ export default {
                 expiration_date: '',
                 price: '',
                 status: ''
+            },
+            feedback: {
+                error: false,
+                message: ''
             }
         }
     },
@@ -165,7 +171,7 @@ export default {
             if(this.newSailer.affiliate_number && this.newSailer.federation && this.newSailer.club && 
             this.newSailer.name && this.newSailer.first_surname && this.newSailer.category && 
             this.newSailer.status){
-                console.log(this.newSailer)
+                this.feedback.message= 'Regatista añadido con éxito'
             }
         }
     }
@@ -218,6 +224,17 @@ export default {
     p{
         padding: 5px 0 5px;
         color: rgba(255, 255, 255, 0.692);
+    }
+
+    .feedback{
+        color: #75f742;
+        font-weight: 500;
+        width: 100%;
+        text-align: right;
+    }
+
+    .error{
+        color: #f76742;
     }
 
     .btn{
