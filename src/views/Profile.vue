@@ -3,6 +3,7 @@
         <div id="loading" v-if="loading">
             <span>Cargando...</span>
         </div>
+        <EditModal @hide="edit = false" :profile="profile" v-else-if="!loading && edit"/>
         <div v-else id="profile-container">
             <img id="profile-image" src="../assets/profile.svg" alt="profile image">
             <div id="profile-info">
@@ -13,6 +14,7 @@
                 <p>Federación: <span v-if="profile.federation">{{profile.federation}}</span></p>
                 <p>Estado: <span v-if="profile.status">{{profile.status}}</span></p>
             </div>
+            <button @click="edit = true" v-if="jwt" id="edit-btn">Editar deportista</button>
             <RegattasTable :list="profile.list_of_regattas" v-if="profile.list_of_regattas && profile.list_of_regattas.length > 0" id="regattas-table" />
             <div id="not-regattas-container" v-else>
                 <h2 class="loading" id="not-regattas">No consta su participación en ninguna regata</h2>
@@ -24,6 +26,7 @@
 
 <script>
 
+import EditModal from '../components/EditProfile';
 import RegattasTable from '../components/Regattas-table';
 
 export default {
@@ -33,7 +36,9 @@ export default {
             profile: {},
             id: '',
             url: 'http://c316658e.ngrok.io/regatistas',
-            loading: true
+            loading: true,
+            jwt: localStorage.getItem('auth-regata'),
+            edit: false
         }
     },
     computed: {
@@ -59,6 +64,7 @@ export default {
         this.getProfile();
     },
     components: {
+        EditModal,
         RegattasTable
     }
 }
@@ -71,8 +77,15 @@ export default {
         text-decoration: none;
     }
 
+    #profile-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
     #profile-view {
-        padding: 100px 20px 50px;
+        padding: 130px 20px 50px;
     }
 
     #profile-name {
@@ -128,6 +141,18 @@ export default {
         display: block;
     }
 
+    #edit-btn {
+        margin-top: 20px;
+        margin-right: auto;
+        padding: 5px 10px;
+        border-radius: 4px;
+        outline: none;
+        color: #3b506b;
+        background-color: white;
+        font-weight: bold;
+        font-size: 0.8rem;
+        border-width: 1.4px;
+    }
 
     @media(min-width: 700px) {
 
@@ -136,18 +161,21 @@ export default {
         }
 
         #profile-container {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
+            flex-direction: row;
         }
 
         #profile-image {
-            flex-basis: 50%;
+            flex-basis: 40%;
             margin-bottom: 0;
         }
 
         #profile-info {
-            flex-basis: 50%;
+            flex-basis: 60%;
+        }
+
+        #edit-btn {
+            margin-right: 0;
+            margin-left: auto;
         }
 
         .regattas-container span:nth-child(2) {
@@ -155,7 +183,7 @@ export default {
         }
 
         #not-regattas {
-            margin: 100px auto 30px;
+            margin: 60px auto 30px;
         }
     }
 </style>
