@@ -7,6 +7,8 @@
       @click="choice = 'newAdmin'">Agregar administrador</button>
       <button :class="[this.choice == 'newSailer' ? 'btn btn-active' : 'btn']" 
       @click="choice = 'newSailer'">Agregar regatista</button>
+      <!-- <button :class="[this.choice == 'newSailer' ? 'btn btn-active' : 'btn']" 
+      @click="choice = 'newSailer'">Contraseña olvidada</button> -->
       <button :class="[this.choice == 'logout' ? 'btn btn-active' : 'btn']" 
       @click="choice = 'logout'">Cerrar sesión</button>
     </div>
@@ -15,6 +17,7 @@
       <NewAdmin class="component" v-if="choice == 'newAdmin'"/>
       <NewSailer class="component" v-if="choice == 'newSailer'"/>
       <Logout class="component" v-if="choice == 'logout'"/>
+
     </div>
   </div>
 </template>
@@ -88,6 +91,18 @@ export default {
   .btn-active{
     background-color: #3b506b;
     color: beige;
+  }
+
+   @media (max-width: 500px) {
+    .btn{
+      font-size: 14px;
+    }
+    .collection{
+      border-radius: 0px;
+    }
+    .admin {
+      padding: 85px 0px 10px;
+    }
   }
 
 </style>
