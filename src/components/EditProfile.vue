@@ -4,6 +4,7 @@
         <span id="hide" @click="$emit('hide')">Cerrar</span>
 
         <h2>Editar deportista</h2>
+        <span class="msg" :class="msg.error ? 'error' : ''" v-if="msg.status">{{msg.text}}</span>
         <div class="formulary">
 
             <div class="field">
@@ -59,7 +60,12 @@ export default {
     },
     data() {
         return {
-            copy: {...this.profile}
+            copy: {...this.profile},
+            msg: {
+                status: false,
+                error: false,
+                text: ''
+            }
         }
     },
     methods: {
@@ -70,10 +76,29 @@ export default {
             return Object.keys(obj1).reduce( (prev, current) => prev && obj1[current] == obj2[current], true );
         },
         editUser() {
-            if(this.checkObjEqual(this.profile, this.copy)){
-                console.log('Equal');
-            }else {
-                console.log('different');
+            this.msg.status = false;
+            this.msg.error = false;
+            const update = {
+                name: this.copy.name,
+                first_surname: this.copy.first_surname,
+                second_surname: this.copy.second_surname,
+                category: this.copy.category,
+                club: this.copy.category,
+                boat: this.copy.boat,
+                federation: this.copy.federation
+            }
+            if(!this.checkObjEqual(this.profile, this.copy)){
+                const id = window.location.hash.split('/').slice(-1)[0];
+                this.$axios.patch(`http://403e66c2.ngrok.io/regatista/${id}`, update)
+                    .then(() => {
+                        this.msg.status = true;
+                        this.msg.text = 'Perfil actualizado correctamente.'
+                    })
+                    .catch(() => {
+                        this.msg.status = true;
+                        this.msg.error = true;
+                        this.msg.text = 'No se ha podido actualizar, lo sentimos.';
+                    });
             }
         }
     }
@@ -82,66 +107,78 @@ export default {
 
 <style scoped>
 
-#hide {
-    position: absolute;
-    top: 90px;
-    left: 30px;
-    cursor: pointer;
-    font-weight: 500;
-}
+    #hide {
+        position: absolute;
+        top: 90px;
+        left: 30px;
+        cursor: pointer;
+        font-weight: 500;
+    }
 
-.formulary{
-    margin: 20px auto;
-    border-radius: 5px;
-    background-color: #3b506b;
-    color: white;
-  }
+    .formulary{
+        margin: 20px auto;
+        border-radius: 5px;
+        background-color: #3b506b;
+        color: white;
+    }
 
-  .field{
-    padding: 10px 30px 10px;
-    text-align: left;
-    flex-basis: 50%;
-  }
+    .field{
+        padding: 10px 30px 10px;
+        text-align: left;
+        flex-basis: 50%;
+    }
 
-  label{
-    padding: 5px 0 15px;
-    font-size: 16px;
-    display: inline-block;
-  }
+    label{
+        padding: 5px 0 15px;
+        font-size: 16px;
+        display: inline-block;
+    }
 
-  input, select{
-    width: 100%;
-    padding: 5px;
-    border: 0px;
-    border-radius: 5px;
-    font-size: 14px;
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  }
+    input, select{
+        width: 100%;
+        padding: 5px;
+        border: 0px;
+        border-radius: 5px;
+        font-size: 14px;
+        font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    }
 
-  p{
-    margin: 0px 0px 10px;
-    color: white;
-  }
+    p{
+        margin: 0px 0px 10px;
+        color: white;
+    }
 
-  .btn-edit{
-    padding: 20px 30px 20px;
-    text-align: right;
-  }
+    .btn-edit{
+        padding: 20px 30px 20px;
+        text-align: right;
+    }
 
-  .btn{
-    padding: 5px;
-    font-size: 16px;
-    border-radius: 5px;
-    align-self: center;
-    margin-left: 20px;
-    text-decoration: none;
-  }
+    .btn{
+        padding: 5px;
+        font-size: 16px;
+        border-radius: 5px;
+        align-self: center;
+        margin-left: 20px;
+        text-decoration: none;
+    }
 
-  .send{
-    background-color: white;
-    color: #3b506b;
-    font-weight: bolder;
-  }
+    .send{
+        background-color: white;
+        color: #3b506b;
+        font-weight: bolder;
+    }
+
+    .msg {
+        color: green;
+        font-size: 1.1rem;
+        font-weight: 500;
+        margin-top: 10px;
+        display: inline-block;
+    }
+
+    .error {
+        color: #f76742;
+    }
 
   @media (min-width: 780px) {
       .formulary {
