@@ -46,7 +46,7 @@ export default {
   computed: {
     urlToUse() {
       if(this.url.search){
-        return `${this.url.urlBase}?name=${this.url.search}${this.url.page ? `&offset=${this.url.page}` : ''}`
+        return `${this.url.urlBase}?fullName=${this.url.search}${this.url.page ? `&offset=${this.url.page}` : ''}`
       }else{
         return `${this.url.urlBase}s${this.url.page ? `?offset=${this.url.page}` : ''}`
       }
@@ -87,6 +87,7 @@ export default {
   created() {
     this.getProfiles();
     //When the logo of the navbar is clicked trigger the refresh event
+    this.$emit('url', this.urlToUse);
     eventBus.$on('refresh', () => {
       this.result.total = 0;
       this.url.page = 0;

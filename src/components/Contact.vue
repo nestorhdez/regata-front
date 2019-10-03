@@ -48,7 +48,7 @@ export default {
       email: '',
       issue: '',
       description: '',
-      emailTo: 'ruben.altair91@gmail.com'
+      emailTo: 'federacion.velacanaria@gmail.com'
     }
   },
 
