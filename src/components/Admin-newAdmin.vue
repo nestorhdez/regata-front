@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import { create } from 'domain';
 export default {
     data() {
         return {
@@ -41,24 +42,32 @@ export default {
             message: {
                 issue: 'Ha sido dado de alta como administrador en web de regatistas canarios',
                 address: 'www.webderegatistas.com',
-                advise: '%0A%0ALe recomendamos que modifique su contraseña en cuanto se conecte',
                 boddy1: 'Bienvenido, se le ha otorgado una cuenta como administrador de la web',
                 boddy2: '.Sus datos son los siguientes:%0A%0Anombre de usuario:'
             },
             feedback: {
                 error: false,
                 message: ''
-            }
+            },
+            url: 'http://403e66c2.ngrok.io/auth/signup'
         }
     },
     methods: {
         addAdmin(){
-            this.feedback.message= 'Nuevo administrador creado con éxito'
+            this.$axios.post(this.url, {name: this.name, email: this.email, password: this.password})
+            .then(response => {
+                this.feedback.error= false
+                this.feedback.message= 'Nuevo administrador creado con éxito'
+            })
+            .catch(() => {
+                this.feedback.error = true
+                this.feedback.message= 'Lo sentimos, ha ocurrido un error en el servidor'
+            });
         }
     },
     computed: {
         mailto() {
-            return `mailto:${this.email}?subject=${this.message.issue}&body=${this.message.boddy1} ${this.message.address}${this.message.boddy2} ${this.name}%0Acontraseña: ${this.password}${this.message.advise}`
+            return `mailto:${this.email}?subject=${this.message.issue}&body=${this.message.boddy1} ${this.message.address}${this.message.boddy2} ${this.name}%0Acontraseña: ${this.password}`
         },
         required() {
             if(this.name && this.email.includes("@" && ".") && this.password){
