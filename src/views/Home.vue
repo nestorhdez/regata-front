@@ -46,7 +46,7 @@ export default {
   computed: {
     urlToUse() {
       if(this.url.search){
-        return `${this.url.urlBase}?name=${this.url.search}${this.url.page ? `&offset=${this.url.page}` : ''}`
+        return `${this.url.urlBase}?fullName=${this.url.search}${this.url.page ? `&offset=${this.url.page}` : ''}`
       }else{
         return `${this.url.urlBase}s${this.url.page ? `?offset=${this.url.page}` : ''}`
       }
