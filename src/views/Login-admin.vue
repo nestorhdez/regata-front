@@ -14,18 +14,26 @@
                 <input type="password" v-model="passwordUser" id="Password"
                 placeholder="Introduzca su contraseña" required>
             </div>
-            <button @click="access">Iniciar sesión</button>
+            <div class="form-bottom">
+                <button @click="access">Iniciar sesión</button>
+                <a @click="forget ? forget= false : forget= true">
+                ¿olvidastes la contrasseña?</a>
+            </div> 
+            <forgetPassword v-if="this.forget"/>   
         </div>
     </div>
 </template>
 
 <script>
+import forgetPassword from '@/components/forgetPassword.vue'
+
 export default {
     data() {
         return{
             nameUser: '',
             passwordUser: '',
             denied: false,
+            forget: false,
             jwt: localStorage.getItem('auth-regata')
         }
     },
@@ -44,6 +52,9 @@ export default {
         if(this.jwt) {
             this.$router.replace('/admin');
         }
+    },
+    components: {
+        forgetPassword
     }
 }
 </script>
@@ -91,6 +102,12 @@ export default {
         font-size: 14px;
     }
 
+    .form-bottom{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     button{
         width: 150px;
         margin: 20px 0px 10px;
@@ -100,6 +117,13 @@ export default {
         border-radius: 5px;
         align-self: center;
         color: #3b506b;
+    }
+
+    a{
+        cursor: pointer;
+        font-size: 14px;
+        margin: 10px;
+        color: rgba(19, 226, 198, 0.938);
     }
 
 </style>
