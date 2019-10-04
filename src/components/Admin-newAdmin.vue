@@ -49,7 +49,7 @@ export default {
                 error: false,
                 message: ''
             },
-            url: 'http://403e66c2.ngrok.io/auth/signup'
+            url: 'http://38232cf0.ngrok.io/auth/signup'
         }
     },
     methods: {

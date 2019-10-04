@@ -17,7 +17,7 @@ export default {
     data() {
         return {
             email: '',
-            url: 'http://403e66c2.ngrok.io/auth/forgot_password',
+            url: 'http://38232cf0.ngrok.io/auth/forgot_password',
             feedback: {
                 error: false,
                 message: ''
@@ -30,7 +30,7 @@ export default {
             this.$axios.post(this.url, {email: this.email})
             .then(response => {
                 this.feedback.error= false
-                this.feedback.message= 'su solicitud se ha enviado con éxito' 
+                this.feedback.message= response.data.message
             })
             .catch(() => {
                 this.feedback.error = true
