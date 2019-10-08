@@ -87,16 +87,4 @@ export default {
     color: beige;
   }
 
-   @media (max-width: 500px) {
-    .btn{
-      font-size: 14px;
-    }
-    .collection{
-      border-radius: 0px;
-    }
-    .admin {
-      padding: 85px 0px 10px;
-    }
-  }
-
 </style>
