@@ -12,8 +12,6 @@
       <NewAdmin class="component" v-if="choice == 'newAdmin'"/>
       <NewSailer class="component" v-if="choice == 'newSailer'"/>
       <Logout class="component" v-if="choice == 'logout'"/>
-      <forgetPassword class="component" v-if="choice == 'forget'"/>
-
     </div>
   </div>
 </template>

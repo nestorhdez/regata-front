@@ -48,7 +48,7 @@ export default {
       email: '',
       issue: '',
       description: '',
-      emailTo: 'federacion.velacanaria@gmail.com'
+      emailTo: 'federacion.mailtemporal@gmail.com'
     }
   },
 
@@ -59,7 +59,7 @@ export default {
   },
   computed: {
     mailto() {
-      return `mailto:${this.emailTo}?subject=(RANKING): ${this.issue}&body=Mensaje de ${this.firstName} ${this.surName} <${this.email}>:%0A${this.description}`
+      return `mailto:${this.emailTo}?subject=(RANKING): ${this.issue}&body=Mensaje de ${this.firstName} ${this.surName} %20%3C${this.email}%3E:%0A${this.description}`
     },
     required() {
       if(this.firstName && this.surName && this.email.includes("@" && ".") && this.issue){

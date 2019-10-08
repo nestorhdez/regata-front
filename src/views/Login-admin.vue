@@ -16,7 +16,8 @@
             </div>
             <div class="form-bottom">
                 <button @click="access">Iniciar sesión</button>
-                <a @click="forget ? forget= false : forget= true">
+                <a :class="[this.forget ? 'apply disable' : 'apply']" 
+                @click="forget ? forget= false : forget= true">
                 ¿olvidastes la contrasseña?</a>
             </div> 
             <forgetPassword v-if="this.forget"/>   
@@ -119,11 +120,15 @@ export default {
         color: #3b506b;
     }
 
-    a{
+    .apply{
         cursor: pointer;
         font-size: 14px;
         margin: 10px;
         color: rgba(19, 226, 198, 0.938);
+    }
+
+    .disable{
+        opacity: 0.5;
     }
 
 </style>
