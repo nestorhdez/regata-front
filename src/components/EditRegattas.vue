@@ -14,7 +14,7 @@
         <div class="formulary" v-for="(regatta, i) in regattas" :key="i">
 
             <div class="field">
-                <div class="basis-15">
+                <div class="basis-20">
                     <label :for="`category-${i}`">Categoría</label>
                     <input class="info" type="text" v-model="regatta.category" :id="`category-${i}`" placeholder="Categoría" required>
                 </div>
@@ -22,11 +22,7 @@
                     <label :for="`regata-${i}`">Regata</label>
                     <input class="info" type="text" v-model="regatta.regatta_title" :id="`regata-${i}`" placeholder="Regata" required>
                 </div>
-                <div class="basis-10">
-                    <label :for="`position-${i}`">Posición</label>
-                    <input class="info" type="number" v-model="regatta.position" :id="`position-${i}`" placeholder="Posición" required>
-                </div>
-                <div class="basis-15">
+                <div class="basis-20">
                     <label :for="`vela-${i}`">vela</label>
                     <input class="info" type="text" v-model="regatta.vela" :id="`vela-${i}`" placeholder="vela" required>
                 </div>
@@ -34,11 +30,15 @@
                     <label :for="`club-${i}`">Club</label>
                     <input class="info" type="text" v-model="regatta.club" :id="`club-${i}`" placeholder="Club" required>
                 </div>
-                <div class="basis-15">
+                <div class="basis-10">
+                    <label :for="`position-${i}`">Posición</label>
+                    <input class="info" type="number" v-model="regatta.position" :id="`position-${i}`" placeholder="Posición" required>
+                </div>
+                <div class="basis-20">
                     <label :for="`net_points-${i}`">Puntos netos</label>
                     <input class="info" type="number" v-model="regatta.net_points" :id="`net_points-${i}`" placeholder="Puntos netos" required>
                 </div>
-                <div class="basis-15">
+                <div class="basis-20">
                     <label :for="`total_points-${i}`">Puntos totales</label>
                     <input class="info" type="number" v-model="regatta.total_points" :id="`total_points-${i}`" placeholder="Puntos totales" required>
                 </div>
@@ -150,19 +150,7 @@ export default {
     }
 
     .field div{
-        margin-right: 10px;
-    }
-
-    .basis-10{
-        flex-basis: 10%;
-    }
-
-    .basis-70{
-        flex-basis: 70%;
-    }
-
-    .basis-15{
-        flex-basis: 15%;
+        flex-basis: 100%;
     }
 
     label{
@@ -194,10 +182,7 @@ export default {
         margin-left: auto;
     }
 
-    .btn-edit{
-        margin-top: 30px;
-        text-align: right;
-    }
+    
 
     .btn{
         padding: 5px;
@@ -236,16 +221,35 @@ export default {
         color: #f76742;
     }
 
-  @media (min-width: 780px) {
-      .formulary {
-            display: flex;
-            flex-wrap: wrap;
-            max-width: 70%;
-      }
+@media (min-width: 686px) {
+    .formulary {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 70%;
+    }
+}
 
-      .btn-edit {
-          margin-left: auto;
-      }
-  }
+@media (min-width: 873px) {
+
+    .field div{
+        margin-right: 10px;
+    }
+
+    .field div.basis-10{
+        flex-basis: 10%;
+    }
+
+    .field div.basis-70{
+        flex-basis: 70%;
+    }
+
+    .field div.basis-20{
+        flex-basis: 20%;
+    }
+
+    .remove{
+        margin-top: 30px;
+    }
+}
 
 </style>
