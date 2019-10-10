@@ -41,7 +41,7 @@ export default {
     methods: {
         access() {
             this.denied = false;
-            this.$axios.post('http://38232cf0.ngrok.io/auth/login', {name: this.nameUser, password: this.passwordUser})
+            this.$axios.post('https://web-ranking-back.herokuapp.com/auth/login', {name: this.nameUser, password: this.passwordUser})
                 .then(res => {
                     localStorage.setItem('auth-regata', JSON.stringify(res.data));
                     this.$router.replace('/admin');

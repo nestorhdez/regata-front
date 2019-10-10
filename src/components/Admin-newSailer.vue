@@ -174,7 +174,7 @@ export default {
             this.newSailer.name && this.newSailer.first_surname && this.newSailer.category && 
             this.newSailer.status && this.newSailer.boat){
                 
-                this.$axios.post('http://403e66c2.ngrok.io/regatistas', this.newSailer)
+                this.$axios.post('https://web-ranking-back.herokuapp.com/regatistas', this.newSailer)
                     .then(() => this.feedback.message= 'Regatista añadido con éxito')
                     .catch(() => {
                         this.feedback.error = true;

@@ -48,7 +48,7 @@ export default {
                 error: false,
                 message: ''
             },
-            url: 'http://38232cf0.ngrok.io/auth/signup'
+            url: 'https://web-ranking-back.herokuapp.com/auth/signup'
         }
     },
     methods: {

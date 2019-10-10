@@ -37,7 +37,7 @@ export default {
         message: ''
       },
       url: {
-        urlBase: 'http://38232cf0.ngrok.io/regatista',
+        urlBase: 'https://web-ranking-back.herokuapp.com/regatista',
         page: 0,
         search: ''
       }

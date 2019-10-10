@@ -28,7 +28,7 @@
                     <input v-model="copy.club" type="text" id="club">
             </div>
             <div class="field">
-                    <label for="boat">Embarcación</label>
+                    <label for="boat">Clase</label>
                     <input v-model="copy.boat" type="text" id="boat">
             </div>
             <div class="field">
@@ -83,13 +83,13 @@ export default {
                 first_surname: this.copy.first_surname,
                 second_surname: this.copy.second_surname,
                 category: this.copy.category,
-                club: this.copy.category,
+                club: this.copy.club,
                 boat: this.copy.boat,
                 federation: this.copy.federation
             }
             if(!this.checkObjEqual(this.profile, this.copy)){
                 const id = window.location.hash.split('/').slice(-1)[0];
-                this.$axios.patch(`http://403e66c2.ngrok.io/regatista/${id}`, update)
+                this.$axios.patch(`https://web-ranking-back.herokuapp.com/regatista/${id}`, update)
                     .then(() => {
                         this.msg.status = true;
                         this.msg.text = 'Perfil actualizado correctamente.'

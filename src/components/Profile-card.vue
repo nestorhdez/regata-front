@@ -6,7 +6,7 @@
         <h2>{{`${profile.name} ${profile.first_surname} ${profile.second_surname}`}}</h2>
         <span v-if="profile.club">Pertenece al club: {{profile.club}}</span>
         <span v-if="profile.category">Categoría: {{profile.category}}</span>
-        <span v-if="profile.boat">Bote: {{profile.boat}}</span>
+        <span v-if="profile.boat">Clase: {{profile.boat}}</span>
       </div>
     </router-link>
 

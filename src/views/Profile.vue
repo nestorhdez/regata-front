@@ -3,22 +3,26 @@
         <div id="loading" v-if="loading">
             <span>Cargando...</span>
         </div>
-        <EditModal @hide="edit = false" :profile="profile" v-else-if="!loading && edit"/>
+        <EditProfile @hide="edited" :profile="profile" v-else-if="!loading && editProfile"/>
+        <EditRegattas @hide="edited" :profile="profile" v-else-if="!loading && editRegattas"/>
         <div v-else id="profile-container">
             <img id="profile-image" src="../assets/profile.svg" alt="profile image">
             <div id="profile-info">
                 <h1 id="profile-name" v-if="profile.name">{{`${profile.name} ${profile.first_surname} ${profile.second_surname}`}}</h1>
                 <p>Categoría: <span v-if="profile.category">{{profile.category}}</span></p>
                 <p>Club: <span v-if="profile.club">{{profile.club}}</span></p>
-                <p>Embarcación: <span v-if="profile.boat">{{profile.boat}}</span></p>
+                <p>Clase: <span v-if="profile.boat">{{profile.boat}}</span></p>
                 <p>Federación: <span v-if="profile.federation">{{profile.federation}}</span></p>
                 <p>Estado: <span v-if="profile.status">{{profile.status}}</span></p>
             </div>
-            <button @click="edit = true" v-if="jwt" id="edit-btn">Editar deportista</button>
+            <div id="edit-btn-container">
+                <button @click="editProfile = true" v-if="jwt" class="edit-btn">Editar deportista</button>
+                <button @click="editRegattas = true" v-if="jwt" class="edit-btn">Editar regatas</button>
+            </div>
             <RegattasTable :list="profile.list_of_regattas" v-if="profile.list_of_regattas && profile.list_of_regattas.length > 0" id="regattas-table" />
             <div id="not-regattas-container" v-else>
                 <h2 class="loading" id="not-regattas">No consta su participación en ninguna regata</h2>
-                <router-link to="/contact">Realizar una petición</router-link>
+                <router-link v-if="!jwt" to="/contact">Realizar una petición</router-link>
             </div>
         </div>
     </div>
@@ -26,7 +30,8 @@
 
 <script>
 
-import EditModal from '../components/EditProfile';
+import EditProfile from '../components/EditProfile';
+import EditRegattas from '../components/EditRegattas';
 import RegattasTable from '../components/Regattas-table';
 
 export default {
@@ -35,10 +40,11 @@ export default {
         return {
             profile: {},
             id: '',
-            url: 'http://38232cf0.ngrok.io/regatistas',
+            url: 'https://web-ranking-back.herokuapp.com/regatistas',
             loading: true,
             jwt: localStorage.getItem('auth-regata'),
-            edit: false
+            editProfile: false,
+            editRegattas: false
         }
     },
     computed: {
@@ -47,6 +53,11 @@ export default {
         }
     },
     methods: {
+        edited(){
+            this.editProfile = false;
+            this.editRegattas = false;
+            this.getProfile();
+        },
         getProfile() {
             this.loading = true;
             this.$axios.get(this.urlToUse)
@@ -64,7 +75,8 @@ export default {
         this.getProfile();
     },
     components: {
-        EditModal,
+        EditProfile,
+        EditRegattas,
         RegattasTable
     }
 }
@@ -141,9 +153,12 @@ export default {
         display: block;
     }
 
-    #edit-btn {
+    #edit-btn-container {
         margin-top: 20px;
         margin-right: auto;
+    }
+
+    .edit-btn {
         padding: 5px 10px;
         border-radius: 4px;
         outline: none;
@@ -152,6 +167,10 @@ export default {
         font-weight: bold;
         font-size: 0.8rem;
         border-width: 1.4px;
+    }
+
+    .edit-btn:nth-child(2){
+        margin-left: 10px;
     }
 
     @media(min-width: 700px) {
@@ -173,7 +192,7 @@ export default {
             flex-basis: 60%;
         }
 
-        #edit-btn {
+        #edit-btn-container {
             margin-right: 0;
             margin-left: auto;
         }

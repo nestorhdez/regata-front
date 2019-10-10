@@ -2,7 +2,7 @@
     <div id="regattas-table">
         <div id="title-container">
             <h2>Resultado de regatas</h2>
-            <router-link to="/contact">Realizar una petición</router-link>
+            <router-link v-if="!jwt" to="/contact">Realizar una petición</router-link>
         </div>
         <div class="regatta-cells grid-cells">
             <span>Posición</span>
@@ -22,6 +22,11 @@ export default {
     name: 'regattas-table',
     props:{
         list: Array
+    },
+    data() {
+        return {
+            jwt: localStorage.getItem('auth-regata')
+        }
     }
 }
 </script>
