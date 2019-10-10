@@ -14,25 +14,34 @@
                 <input type="password" v-model="passwordUser" id="Password"
                 placeholder="Introduzca su contraseña" required>
             </div>
-            <button @click="access">Iniciar sesión</button>
+            <div class="form-bottom">
+                <button @click="access">Iniciar sesión</button>
+                <a :class="[this.forget ? 'apply disable' : 'apply']" 
+                @click="forget ? forget= false : forget= true">
+                ¿olvidastes la contrasseña?</a>
+            </div> 
+            <forgetPassword v-if="this.forget"/>   
         </div>
     </div>
 </template>
 
 <script>
+import forgetPassword from '@/components/forgetPassword.vue'
+
 export default {
     data() {
         return{
             nameUser: '',
             passwordUser: '',
             denied: false,
+            forget: false,
             jwt: localStorage.getItem('auth-regata')
         }
     },
     methods: {
         access() {
             this.denied = false;
-            this.$axios.post('http://403e66c2.ngrok.io/auth/login', {name: this.nameUser, password: this.passwordUser})
+            this.$axios.post('http://38232cf0.ngrok.io/auth/login', {name: this.nameUser, password: this.passwordUser})
                 .then(res => {
                     localStorage.setItem('auth-regata', JSON.stringify(res.data));
                     this.$router.replace('/admin');
@@ -44,6 +53,9 @@ export default {
         if(this.jwt) {
             this.$router.replace('/admin');
         }
+    },
+    components: {
+        forgetPassword
     }
 }
 </script>
@@ -91,6 +103,12 @@ export default {
         font-size: 14px;
     }
 
+    .form-bottom{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     button{
         width: 150px;
         margin: 20px 0px 10px;
@@ -100,6 +118,17 @@ export default {
         border-radius: 5px;
         align-self: center;
         color: #3b506b;
+    }
+
+    .apply{
+        cursor: pointer;
+        font-size: 14px;
+        margin: 10px;
+        color: rgba(19, 226, 198, 0.938);
+    }
+
+    .disable{
+        opacity: 0.5;
     }
 
 </style>

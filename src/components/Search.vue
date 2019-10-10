@@ -1,7 +1,7 @@
 <template>
     <div class="searchContainer">
         <input type="text" class="search search__input" @keyup.enter ="getOne()" 
-        v-model= "sailer" placeholder="Nombre del regatista">
+        v-model= "sailer" placeholder="Introduzca regatista">
         <button class="search search__btn" @click="getOne()">Buscar</button>
     </div>
 </template>
